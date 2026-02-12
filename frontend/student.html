@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Academy Student Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">QA Academy</a>
+      <div class="header-links">
+        <a class="header-cta" href="crm.html">CRM</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container section">
+    <section class="module-card" id="auth-card">
+      <h1>Вход ученика</h1>
+      <p>Введи логин и пароль, выданные в CRM.</p>
+      <form id="login-form" class="subscribe-form">
+        <label>
+          Логин
+          <input type="text" name="login" required>
+        </label>
+        <label>
+          Пароль
+          <input type="password" name="password" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Войти</button>
+        <p class="form-message" id="login-message"></p>
+      </form>
+    </section>
+
+    <section id="student-app" class="student-app hidden">
+      <aside class="module-card student-sidebar">
+        <h2>Модули</h2>
+        <div id="module-nav"></div>
+      </aside>
+
+      <section class="student-content-wrap">
+        <div class="module-card student-access" id="access-state"></div>
+        <div class="lesson-layout" id="lesson-layout">
+          <article class="module-card lesson-left">
+            <h2 id="topic-title"></h2>
+            <p class="lesson-meta" id="topic-module"></p>
+            <div id="topic-content"></div>
+          </article>
+          <aside class="module-card lesson-right hidden" id="trainer-pane"></aside>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <section class="comment-widget hidden" id="comment-widget">
+    <header>
+      <strong>Комментарии</strong>
+      <span id="comment-topic-name"></span>
+    </header>
+    <div class="comment-list" id="comment-list"></div>
+    <form id="comment-form">
+      <input type="text" name="comment" placeholder="Написать комментарий..." required>
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
+
+  <script src="app-data.js"></script>
+  <script src="student.js"></script>
+</body>
+</html>

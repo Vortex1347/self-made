@@ -1,0 +1,124 @@
+import { MigrationInterface, QueryRunner } from 'typeorm';
+
+export class AddLearningDomain1739000001000 implements MigrationInterface {
+  name = 'AddLearningDomain1739000001000';
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`
+      CREATE TABLE IF NOT EXISTS "student_account" (
+        "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+        "name" character varying NOT NULL,
+        "login" character varying NOT NULL,
+        "password_hash" character varying NOT NULL,
+        "access_until" date NOT NULL,
+        "is_active" boolean NOT NULL DEFAULT true,
+        "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        CONSTRAINT "PK_student_account_id" PRIMARY KEY ("id"),
+        CONSTRAINT "UQ_student_account_login" UNIQUE ("login")
+      )
+    `);
+
+    await queryRunner.query(`
+      CREATE TABLE IF NOT EXISTS "course_module" (
+        "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+        "title" character varying NOT NULL,
+        "order_index" integer NOT NULL DEFAULT 0,
+        "is_published" boolean NOT NULL DEFAULT true,
+        "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        CONSTRAINT "PK_course_module_id" PRIMARY KEY ("id")
+      )
+    `);
+
+    await queryRunner.query(`
+      CREATE TABLE IF NOT EXISTS "course_topic" (
+        "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+        "module_id" uuid NOT NULL,
+        "title" character varying NOT NULL,
+        "order_index" integer NOT NULL DEFAULT 0,
+        "content_blocks" jsonb NOT NULL DEFAULT '[]'::jsonb,
+        "trainer" jsonb,
+        "is_published" boolean NOT NULL DEFAULT true,
+        "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        CONSTRAINT "PK_course_topic_id" PRIMARY KEY ("id"),
+        CONSTRAINT "FK_course_topic_module_id" FOREIGN KEY ("module_id") REFERENCES "course_module"("id") ON DELETE CASCADE
+      )
+    `);
+
+    await queryRunner.query(`
+      CREATE TABLE IF NOT EXISTS "topic_comment" (
+        "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+        "topic_id" uuid NOT NULL,
+        "student_id" uuid NOT NULL,
+        "author_name" character varying NOT NULL,
+        "author_login" character varying NOT NULL,
+        "text" text NOT NULL,
+        "edited_by_admin" boolean NOT NULL DEFAULT false,
+        "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+        CONSTRAINT "PK_topic_comment_id" PRIMARY KEY ("id"),
+        CONSTRAINT "FK_topic_comment_topic_id" FOREIGN KEY ("topic_id") REFERENCES "course_topic"("id") ON DELETE CASCADE,
+        CONSTRAINT "FK_topic_comment_student_id" FOREIGN KEY ("student_id") REFERENCES "student_account"("id") ON DELETE CASCADE
+      )
+    `);
+
+    await queryRunner.query(`
+      INSERT INTO "course_module" ("id", "title", "order_index", "is_published")
+      VALUES
+        ('11111111-1111-1111-1111-111111111111', 'Модуль 1. База QA', 1, true),
+        ('22222222-2222-2222-2222-222222222222', 'Модуль 2. API и SQL', 2, true)
+      ON CONFLICT DO NOTHING
+    `);
+
+    await queryRunner.query(`
+      INSERT INTO "course_topic" ("id", "module_id", "title", "order_index", "content_blocks", "trainer", "is_published")
+      VALUES
+      (
+        'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1',
+        '11111111-1111-1111-1111-111111111111',
+        'Что тестировать в продукте',
+        1,
+        '[{"type":"text","value":"В этой теме разберем уровни тестирования и зоны риска в продукте."},{"type":"list","value":["Функциональность","Интеграции","Безопасность","UX-критичные сценарии"]}]'::jsonb,
+        NULL,
+        true
+      ),
+      (
+        'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2',
+        '11111111-1111-1111-1111-111111111111',
+        'Тест-дизайн и техники',
+        2,
+        '[{"type":"text","value":"Классы эквивалентности, граничные значения и таблицы решений."},{"type":"image","value":"Схема техники тест-дизайна (placeholder)"}]'::jsonb,
+        '{"type":"case-builder","title":"Тренажер: собери тест-кейсы","description":"Выбери технику и сформируй 3 тест-кейса на форму регистрации."}'::jsonb,
+        true
+      ),
+      (
+        'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1',
+        '22222222-2222-2222-2222-222222222222',
+        'Проверка API в Postman',
+        1,
+        '[{"type":"text","value":"Разбираем CRUD, авторизацию, статусы и негативные проверки."}]'::jsonb,
+        '{"type":"api-check","title":"Тренажер: API smoke","description":"Пройди чек-лист smoke проверок и отметь найденные дефекты."}'::jsonb,
+        true
+      ),
+      (
+        'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb2',
+        '22222222-2222-2222-2222-222222222222',
+        'SQL для QA',
+        2,
+        '[{"type":"text","value":"SELECT, JOIN, GROUP BY для проверки данных после API операций."},{"type":"list","value":["SELECT basics","INNER JOIN","GROUP BY + COUNT"]}]'::jsonb,
+        '{"type":"sql","title":"Тренажер: SQL sandbox","description":"Собери SQL-запрос по заданию и сравни с эталонным результатом."}'::jsonb,
+        true
+      )
+      ON CONFLICT DO NOTHING
+    `);
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query('DROP TABLE IF EXISTS "topic_comment"');
+    await queryRunner.query('DROP TABLE IF EXISTS "course_topic"');
+    await queryRunner.query('DROP TABLE IF EXISTS "course_module"');
+    await queryRunner.query('DROP TABLE IF EXISTS "student_account"');
+  }
+}

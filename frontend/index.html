@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">QA Academy</a>
+      <div class="header-links">
+        <a class="header-cta" href="student.html">Портал ученика</a>
+        <a class="header-cta" href="crm.html">CRM</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <p class="badge">Подписка на обучение QA</p>
+      <h1>Платформа обучения QA с ручным контролем доступа и тренажёрами</h1>
+      <p class="hero-text">
+        CRM для администратора, учебный портал для ученика, доступ по подписке, модули с темами и мини-чат комментариев.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="crm.html">Открыть CRM</a>
+        <a class="btn btn-ghost" href="student.html">Открыть портал</a>
+      </div>
+      <ul class="hero-metrics">
+        <li><strong>Manual</strong> выдача доступа по дате окончания</li>
+        <li><strong>Split</strong> слева контент, справа тренажер</li>
+        <li><strong>Chat</strong> компактные комментарии по теме</li>
+      </ul>
+    </section>
+
+    <section class="section container" id="program">
+      <div class="section-head">
+        <h2>Что уже реализовано в MVP</h2>
+      </div>
+      <div class="grid">
+        <article class="module-card">
+          <h3>CRM</h3>
+          <p>Создание ученика, логин/пароль, доступ до даты, выбор текущего ученика, модерация комментариев.</p>
+        </article>
+        <article class="module-card">
+          <h3>Структура обучения</h3>
+          <p>Модули и темы с контент-блоками: текст, список, image-плейсхолдер, встроенный тренажёр.</p>
+        </article>
+        <article class="module-card">
+          <h3>Портал ученика</h3>
+          <p>Проверка подписки при входе, защита темы при истекшем доступе, окно комментариев в формате мини-чата.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <p>© <span id="year"></span> QA Academy</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

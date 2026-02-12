@@ -1,0 +1,40 @@
+{
+  "description": "Команды по порядку: сброс БД, гранты, миграции. Запускать из корня репо (elite-schmuck), если не указано иное.",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Поднять PostgreSQL (если не запущен)",
+      "command": "bash scripts/db-up.sh",
+      "cwd": ".",
+      "comment": "На Windows: bash scripts/db-up.sh"
+    },
+    {
+      "step": 2,
+      "title": "Сброс БД: дропнуть и заново создать elite_schmuck",
+      "command": "node backend/scripts/reset-db.js",
+      "cwd": ".",
+      "comment": "Подключение из backend/.env (API_DB_*). Требует запущенный Postgres."
+    },
+    {
+      "step": 3,
+      "title": "Накатить миграции",
+      "command": "npm run migration:run",
+      "cwd": "backend",
+      "comment": "TypeORM создаёт таблицы. Запуск из папки backend."
+    },
+    {
+      "step": 4,
+      "title": "Гранты (права на схему public)",
+      "command": "docker exec -i elite-schmuck-db psql -U postgres -d elite_schmuck < scripts/grants.sql",
+      "cwd": ".",
+      "comment": "После миграций, чтобы выдать права на созданные таблицы. Локальный psql: psql -h localhost -p 5433 -U postgres -d elite_schmuck -f scripts/grants.sql"
+    },
+    {
+      "step": 5,
+      "title": "(Опционально) Наполнить данными: 100 категорий, 100 коллекций, 1000 товаров",
+      "command": "npm run db:seed",
+      "cwd": "backend",
+      "comment": "Скрипт scripts/seed-data.js"
+    }
+  ]
+}
