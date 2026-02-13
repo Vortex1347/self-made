@@ -87,7 +87,7 @@ class AddLearningDomain1739000001000 {
         'Тест-дизайн и техники',
         2,
         '[{"type":"text","value":"Классы эквивалентности, граничные значения и таблицы решений."},{"type":"image","value":"Схема техники тест-дизайна (placeholder)"}]'::jsonb,
-        '{"type":"case-builder","title":"Тренажер: собери тест-кейсы","description":"Выбери технику и сформируй 3 тест-кейса на форму регистрации."}'::jsonb,
+        '{"title":"Тест по теме: Тест-дизайн и техники","description":"Проверь ключевые принципы тест-дизайна.","questions":[{"question":"Какая техника помогает проверить границы входных данных?","options":["Граничные значения","Случайный перебор","Игнорирование требований"],"correctIndex":0},{"question":"Что важно в хорошем тест-кейсе?","options":["Четкие шаги и ожидаемый результат","Только заголовок","Без ожидаемого результата"],"correctIndex":0}]}'::jsonb,
         true
       ),
       (
@@ -96,7 +96,7 @@ class AddLearningDomain1739000001000 {
         'Проверка API в Postman',
         1,
         '[{"type":"text","value":"Разбираем CRUD, авторизацию, статусы и негативные проверки."}]'::jsonb,
-        '{"type":"api-check","title":"Тренажер: API smoke","description":"Пройди чек-лист smoke проверок и отметь найденные дефекты."}'::jsonb,
+        '{"title":"Тест по теме: Проверка API в Postman","description":"Проверь базовые знания API тестирования.","questions":[{"question":"Что нужно проверять в API-ответе в первую очередь?","options":["Статус-код и контракт ответа","Только цвет кнопки","Размер шрифта"],"correctIndex":0},{"question":"Какой сценарий обязателен в минимальном наборе?","options":["Негативный сценарий с невалидными данными","Только happy path","Только скриншот запроса"],"correctIndex":0}]}'::jsonb,
         true
       ),
       (
@@ -105,7 +105,7 @@ class AddLearningDomain1739000001000 {
         'SQL для QA',
         2,
         '[{"type":"text","value":"SELECT, JOIN, GROUP BY для проверки данных после API операций."},{"type":"list","value":["SELECT basics","INNER JOIN","GROUP BY + COUNT"]}]'::jsonb,
-        '{"type":"sql","title":"Тренажер: SQL sandbox","description":"Собери SQL-запрос по заданию и сравни с эталонным результатом."}'::jsonb,
+        '{"title":"Тест по теме: SQL для QA","description":"Самопроверка по SQL-практике для тестировщика.","questions":[{"question":"Какой оператор используют для объединения таблиц?","options":["JOIN","MERGE FONT","PASTE"],"correctIndex":0},{"question":"Что помогает проверить агрегированные значения?","options":["GROUP BY + COUNT","Только ORDER BY","Только LIMIT"],"correctIndex":0}]}'::jsonb,
         true
       )
       ON CONFLICT DO NOTHING

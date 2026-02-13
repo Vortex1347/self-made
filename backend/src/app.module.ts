@@ -12,6 +12,7 @@ import { CourseControllerModule } from './controllers/public/course/course.contr
 import { TopicCommentControllerModule } from './controllers/public/topic-comment/topic-comment.controller.module';
 import { AdminStudentControllerModule } from './controllers/v1/admin-student/admin-student.controller.module';
 import { AdminCommentControllerModule } from './controllers/v1/admin-comment/admin-comment.controller.module';
+import { AdminCourseControllerModule } from './controllers/v1/admin-course/admin-course.controller.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { AdminCommentControllerModule } from './controllers/v1/admin-comment/adm
     TopicCommentControllerModule,
     AdminStudentControllerModule,
     AdminCommentControllerModule,
+    AdminCourseControllerModule,
   ],
 })
 export class AppModule {}

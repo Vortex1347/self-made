@@ -1,9 +1,8 @@
 # QA Academy
 
 ## Project layout
-- `frontend/` - landing page, admin CRM page, student portal page
+- `frontend/` - landing page (`/`), admin CRM (`/crm`), student portal (`/student`)
 - `backend/` - NestJS API (students, course topics, comments, auth)
-- `backend-reference/` - old reference skeleton (kept as archive)
 
 ## Current status
 - Frontend is connected to backend API.
@@ -16,19 +15,15 @@
    - go to `backend/`
    - copy `env.example.txt` to `.env`
    - run `npm install`
-   - run `npm run db:create`
+   - run `npm run db:docker:up:mac` (macOS/Linux) or `npm run db:docker:up:win` (Windows PowerShell)
    - run `npm run migration:run`
-   - run `npm run db:seed-admin`
-   - run `npm run db:seed-students`
+   - run `npm run db:seed:test-users` (test accounts only)
    - run `npm run start:dev`
 2. Frontend:
    - serve `frontend/` with any static server
-   - open `frontend/crm.html` and `frontend/student.html`
+   - open `/`, `/crm`, `/student`
 
 ## Test credentials
-- Admin (from `env.example.txt` defaults):
-  - login: `admin`
-  - password: `admin123`
-- Students (seed script):
-  - `ivan.qa / pass123` (active)
-  - `maria.qa / pass123` (expired)
+- After `npm run db:seed:test-users`:
+  - Admin: `supervisor / supervisor`
+  - Student: `user / user`

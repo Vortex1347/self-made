@@ -9,6 +9,9 @@ import { UserEntity } from '../../entities/user.entity';
       ...dataSourceOptions,
       synchronize: process.env.API_ENVIRONMENT === 'develop',
     }),
+    // UserEntity is injected from DbModule. Other entities are registered
+    // in feature modules via TypeOrmModule.forFeature([...]).
+    // Full entity list is discovered by dataSourceOptions.entities glob.
     TypeOrmModule.forFeature([UserEntity]),
   ],
   exports: [TypeOrmModule],

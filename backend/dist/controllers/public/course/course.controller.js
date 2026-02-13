@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const student_jwt_auth_guard_1 = require("../../../common/guards/student-jwt-auth.guard");
 const student_service_1 = require("../../../services/student/student.service");
 const course_service_1 = require("../../../services/course/course.service");
+const submit_trainer_dto_1 = require("../../../dto/course/submit-trainer.dto");
 let CourseController = class CourseController {
     constructor(studentService, courseService) {
         this.studentService = studentService;
@@ -29,6 +30,14 @@ let CourseController = class CourseController {
     topic(req, topicId) {
         this.studentService.requireAccess(req.user);
         return this.courseService.getTopic(topicId);
+    }
+    trainer(req, topicId) {
+        this.studentService.requireAccess(req.user);
+        return this.courseService.getTrainer(topicId);
+    }
+    submitTrainer(req, topicId, dto) {
+        this.studentService.requireAccess(req.user);
+        return this.courseService.submitTrainer(topicId, dto);
     }
 };
 exports.CourseController = CourseController;
@@ -47,6 +56,23 @@ __decorate([
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", void 0)
 ], CourseController.prototype, "topic", null);
+__decorate([
+    (0, common_1.Get)('topics/:id/trainer'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], CourseController.prototype, "trainer", null);
+__decorate([
+    (0, common_1.Post)('topics/:id/trainer/submit'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, submit_trainer_dto_1.SubmitTrainerDto]),
+    __metadata("design:returntype", void 0)
+], CourseController.prototype, "submitTrainer", null);
 exports.CourseController = CourseController = __decorate([
     (0, common_1.Controller)('api/public/course'),
     (0, common_1.UseGuards)(student_jwt_auth_guard_1.StudentJwtAuthGuard),

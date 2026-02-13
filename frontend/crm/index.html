@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https: http://localhost:4000; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>QA Academy CRM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="crm-page">
+  <header class="site-header crm-header">
+    <div class="container header-inner">
+      <a class="brand" href="./">QA Academy CRM</a>
+      <div class="header-links crm-header-links">
+        <a class="header-cta" href="../index.html">Промо-сайт</a>
+        <a class="header-cta" href="../student/">Портал ученика</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container section">
+    <div class="section-head">
+      <p class="badge">CRM</p>
+      <h1>CRM администратора</h1>
+      <p>Ручное управление доступами и комментариями в QA Academy.</p>
+      <p class="form-message" id="crm-global-message"></p>
+    </div>
+
+    <section class="module-card" id="admin-auth-card">
+      <h2>Вход администратора</h2>
+      <form id="admin-login-form" class="subscribe-form">
+        <label>
+          Логин
+          <input type="text" name="login" required>
+        </label>
+        <label>
+          Пароль
+          <input type="password" name="password" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Войти</button>
+        <p class="form-message" id="admin-login-message"></p>
+      </form>
+    </section>
+
+    <section id="crm-panel" class="hidden">
+      <nav class="crm-tabs" id="crm-tabs" aria-label="Разделы CRM">
+        <button class="btn btn-ghost crm-tab-btn active" type="button" data-crm-tab="students" aria-selected="true">Ученики</button>
+        <button class="btn btn-ghost crm-tab-btn" type="button" data-crm-tab="modules" aria-selected="false">Модули</button>
+        <button class="btn btn-ghost crm-tab-btn" type="button" data-crm-tab="topics" aria-selected="false">Темы</button>
+        <button class="btn btn-ghost crm-tab-btn" type="button" data-crm-tab="comments" aria-selected="false">Комментарии</button>
+      </nav>
+
+      <section class="crm-grid crm-tab-panel" data-crm-tab-panel="students">
+        <article class="module-card">
+          <h2>Добавить/обновить ученика</h2>
+          <p id="student-form-mode" class="form-mode">Режим: создание/обновление по логину.</p>
+          <form id="student-form" class="subscribe-form">
+            <label>
+              Имя
+              <input type="text" name="name" required>
+            </label>
+            <label>
+              Логин
+              <input type="text" name="login" required>
+            </label>
+            <label>
+              Пароль (оставьте пустым при обновлении — не меняется)
+              <input type="password" name="password" placeholder="Минимум 4 символа">
+            </label>
+            <label>
+              Доступ до
+              <input type="date" name="accessUntil" required>
+            </label>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Сохранить</button>
+              <button class="btn btn-ghost hidden" id="cancel-edit-btn" type="button">Отмена редактирования</button>
+            </div>
+            <p class="form-message" id="student-form-message"></p>
+          </form>
+        </article>
+
+        <article class="module-card">
+          <h2>Ученики</h2>
+          <div id="students-list" class="crm-list"></div>
+        </article>
+      </section>
+
+      <section class="section crm-tab-panel hidden" data-crm-tab-panel="modules">
+        <div class="section-head">
+          <h2>Модули курса</h2>
+          <p>Отдельное управление модулями: порядок, название, публикация.</p>
+        </div>
+        <section class="crm-grid">
+          <article class="module-card">
+            <h3 id="module-form-mode">Создать модуль</h3>
+            <form id="module-form" class="subscribe-form">
+              <label>
+                Название
+                <input type="text" name="title" required>
+              </label>
+              <label>
+                Порядок
+                <input type="number" name="orderIndex" min="0" value="0" required>
+              </label>
+              <label>
+                Публиковать
+                <select name="isPublished" required>
+                  <option value="true">Да</option>
+                  <option value="false">Нет</option>
+                </select>
+              </label>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Сохранить модуль</button>
+                <button class="btn btn-ghost hidden" id="cancel-module-edit-btn" type="button">Отмена</button>
+              </div>
+              <p class="form-message" id="module-form-message"></p>
+            </form>
+          </article>
+          <article class="module-card">
+            <h3>Список модулей</h3>
+            <p class="form-mode">Перетаскивайте карточки для изменения порядка.</p>
+            <div id="modules-list" class="crm-list"></div>
+          </article>
+        </section>
+      </section>
+
+      <section class="section crm-tab-panel hidden" data-crm-tab-panel="topics">
+        <div class="section-head">
+          <h2>Статьи курса (темы)</h2>
+          <p>Управление контентом тем: модуль, заголовок, публикация, content blocks и тесты самопроверки.</p>
+        </div>
+        <section class="crm-grid">
+          <article class="module-card">
+            <h3 id="topic-form-mode">Создать тему</h3>
+            <form id="topic-form" class="subscribe-form">
+              <label>
+                Модуль
+                <select name="moduleId" id="topic-module-select" required></select>
+              </label>
+              <label>
+                Заголовок
+                <input type="text" name="title" required>
+              </label>
+              <label>
+                Порядок
+                <input type="number" name="orderIndex" min="0" value="0" required>
+              </label>
+              <label>
+                Публиковать
+                <select name="isPublished" required>
+                  <option value="true">Да</option>
+                  <option value="false">Нет</option>
+                </select>
+              </label>
+              <label>
+                Content blocks (JSON array)
+                <textarea name="contentBlocks" id="topic-content-blocks" rows="7" placeholder='[{"type":"text","value":"Текст темы"}]' required></textarea>
+              </label>
+              <label>
+                Тест самопроверки (JSON object или пусто)
+                <textarea name="trainer" id="topic-trainer" rows="8" placeholder='{"title":"Тест по теме","description":"Короткая самопроверка","questions":[{"question":"...","options":["A","B","C"],"correctIndex":0}]}'></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Сохранить тему</button>
+                <button class="btn btn-ghost" id="preview-topic-btn" type="button">Превью</button>
+                <button class="btn btn-ghost hidden" id="cancel-topic-edit-btn" type="button">Отмена</button>
+              </div>
+              <p class="form-message" id="topic-form-message"></p>
+            </form>
+            <div class="topic-preview" id="topic-preview">
+              <p class="topic-preview-empty">Нажмите "Превью", чтобы увидеть статью перед публикацией.</p>
+            </div>
+          </article>
+          <article class="module-card">
+            <h3>Список тем</h3>
+            <p class="form-mode">Перетаскивание работает только внутри одного модуля.</p>
+            <div id="topics-list" class="crm-list"></div>
+          </article>
+        </section>
+      </section>
+
+      <section class="section crm-tab-panel hidden" data-crm-tab-panel="comments">
+        <div class="section-head">
+          <h2>Комментарии из тем</h2>
+        </div>
+        <div id="comments-admin-list" class="crm-comments"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../data/storage.js"></script>
+  <script src="../data/http.js"></script>
+  <script src="../data/api.js"></script>
+  <script src="./state.js"></script>
+  <script src="./render.js"></script>
+  <script src="./handlers.js"></script>
+  <script src="./bootstrap.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-﻿import path from 'path';
+import path from 'path';
 import { config } from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
@@ -7,7 +7,7 @@ config({ path: path.resolve(__dirname, '../../../.env') });
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.API_DB_HOST || 'localhost',
-  port: parseInt(process.env.API_DB_PORT || '5433', 10),
+  port: parseInt(process.env.API_DB_PORT || '5435', 10),
   username: process.env.API_DB_USERNAME || 'postgres',
   password: process.env.API_DB_PASSWORD || 'postgres',
   database: process.env.API_DB_DATABASE || 'app_db',

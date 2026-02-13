@@ -46,6 +46,9 @@ export declare class StudentService {
         };
         accessActive: boolean;
     }>;
+    changePasswordStudent(studentId: string, currentPassword: string, newPassword: string): Promise<{
+        ok: boolean;
+    }>;
     getStudentState(student: StudentEntity): {
         student: {
             id: string;

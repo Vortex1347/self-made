@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const student_service_1 = require("../../../services/student/student.service");
 const login_student_dto_1 = require("../../../dto/student/login-student.dto");
 const student_jwt_auth_guard_1 = require("../../../common/guards/student-jwt-auth.guard");
+const change_student_password_dto_1 = require("../../../dto/student/change-student-password.dto");
 let StudentAuthController = class StudentAuthController {
     constructor(studentService) {
         this.studentService = studentService;
@@ -26,6 +27,9 @@ let StudentAuthController = class StudentAuthController {
     }
     me(req) {
         return this.studentService.getStudentState(req.user);
+    }
+    changePassword(req, dto) {
+        return this.studentService.changePasswordStudent(req.user.id, dto.currentPassword, dto.newPassword);
     }
 };
 exports.StudentAuthController = StudentAuthController;
@@ -44,6 +48,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], StudentAuthController.prototype, "me", null);
+__decorate([
+    (0, common_1.Patch)('password'),
+    (0, common_1.UseGuards)(student_jwt_auth_guard_1.StudentJwtAuthGuard),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, change_student_password_dto_1.ChangeStudentPasswordDto]),
+    __metadata("design:returntype", void 0)
+], StudentAuthController.prototype, "changePassword", null);
 exports.StudentAuthController = StudentAuthController = __decorate([
     (0, common_1.Controller)('api/public/student-auth'),
     __metadata("design:paramtypes", [student_service_1.StudentService])

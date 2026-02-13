@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthServiceModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const jwt_1 = require("@nestjs/jwt");
 const auth_service_1 = require("./auth.service");
 const jwt_strategy_1 = require("../../common/strategies/jwt.strategy");
 const user_entity_1 = require("../../entities/user.entity");
@@ -17,7 +18,13 @@ let AuthServiceModule = class AuthServiceModule {
 exports.AuthServiceModule = AuthServiceModule;
 exports.AuthServiceModule = AuthServiceModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.UserEntity])],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.UserEntity]),
+            jwt_1.JwtModule.register({
+                secret: process.env.API_JWT_ACCESS_TOKEN_SECRET,
+                signOptions: { expiresIn: process.env.API_JWT_ACCESS_TOKEN_EXPIRATION || '8h' },
+            }),
+        ],
         providers: [auth_service_1.AuthService, jwt_strategy_1.JwtStrategy],
         exports: [auth_service_1.AuthService],
     })

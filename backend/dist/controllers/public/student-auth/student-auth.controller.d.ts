@@ -1,6 +1,7 @@
 import { StudentService } from '../../../services/student/student.service';
 import { LoginStudentDto } from '../../../dto/student/login-student.dto';
 import { StudentEntity } from '../../../entities/student.entity';
+import { ChangeStudentPasswordDto } from '../../../dto/student/change-student-password.dto';
 export declare class StudentAuthController {
     private readonly studentService;
     constructor(studentService: StudentService);
@@ -29,4 +30,9 @@ export declare class StudentAuthController {
         };
         accessActive: boolean;
     };
+    changePassword(req: {
+        user: StudentEntity;
+    }, dto: ChangeStudentPasswordDto): Promise<{
+        ok: boolean;
+    }>;
 }

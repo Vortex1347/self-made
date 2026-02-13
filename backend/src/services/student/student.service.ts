@@ -40,11 +40,16 @@ export class StudentService {
     if (existing) {
       existing.name = dto.name;
       existing.accessUntil = accessUntil;
-      existing.passwordHash = await bcrypt.hash(dto.password, 10);
+      if (dto.password) {
+        existing.passwordHash = await bcrypt.hash(dto.password, 10);
+      }
       const saved = await this.studentRepo.save(existing);
       return this.toPublicStudent(saved);
     }
 
+    if (!dto.password || dto.password.length < 4) {
+      throw new BadRequestException('Password required for new student (min 4 characters)');
+    }
     const created = this.studentRepo.create({
       name: dto.name,
       login: dto.login,
@@ -83,6 +88,18 @@ export class StudentService {
       student: this.toPublicStudent(student),
       accessActive: isAccessActive(student.accessUntil),
     };
+  }
+
+  async changePasswordStudent(studentId: string, currentPassword: string, newPassword: string) {
+    const student = await this.studentRepo.findOne({ where: { id: studentId, isActive: true } });
+    if (!student) throw new NotFoundException('Student not found');
+
+    const currentOk = await bcrypt.compare(currentPassword, student.passwordHash);
+    if (!currentOk) throw new UnauthorizedException('Current password is incorrect');
+
+    student.passwordHash = await bcrypt.hash(newPassword, 10);
+    await this.studentRepo.save(student);
+    return { ok: true };
   }
 
   getStudentState(student: StudentEntity) {

@@ -3,62 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QA Academy</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https: http://localhost:4000; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>QA Academy СНГ | Курс QA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="bg-shape bg-shape-1"></div>
-  <div class="bg-shape bg-shape-2"></div>
-
+<body class="landing-page">
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#">QA Academy</a>
+      <a class="brand" href="./">QA Academy</a>
       <div class="header-links">
-        <a class="header-cta" href="student.html">Портал ученика</a>
-        <a class="header-cta" href="crm.html">CRM</a>
+        <a class="header-cta header-cta-sales" data-whatsapp-link href="#" target="_blank" rel="noopener noreferrer">Купить в WhatsApp</a>
+        <a class="header-cta" href="./student/">Портал ученика</a>
+        <a class="header-cta" href="./crm/">CRM</a>
       </div>
     </div>
   </header>
 
   <main>
     <section class="hero container">
-      <p class="badge">Подписка на обучение QA</p>
-      <h1>Платформа обучения QA с ручным контролем доступа и тренажёрами</h1>
+      <h1>Освой QA и собери портфолио за 8 недель с поддержкой наставника</h1>
       <p class="hero-text">
-        CRM для администратора, учебный портал для ученика, доступ по подписке, модули с темами и мини-чат комментариев.
+        Практический курс для СНГ: тренажёры, API/SQL, домашние задания и подготовка к собеседованиям в local и remote-команды.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="crm.html">Открыть CRM</a>
-        <a class="btn btn-ghost" href="student.html">Открыть портал</a>
+        <a class="btn btn-primary" data-whatsapp-link href="#" target="_blank" rel="noopener noreferrer">Забронировать место</a>
+        <a class="btn btn-ghost" href="#program">Посмотреть программу</a>
       </div>
       <ul class="hero-metrics">
-        <li><strong>Manual</strong> выдача доступа по дате окончания</li>
-        <li><strong>Split</strong> слева контент, справа тренажер</li>
-        <li><strong>Chat</strong> компактные комментарии по теме</li>
+        <li><strong>8 недель</strong> интенсивного обучения с практикой</li>
+        <li><strong>3 проекта</strong> в портфолио на GitHub</li>
+        <li><strong>Поддержка</strong> на русском для студентов из СНГ</li>
       </ul>
+    </section>
+
+    <section class="section container">
+      <div class="sales-grid">
+        <article class="module-card offer-card">
+          <h3>Для кого курс</h3>
+          <ul class="offer-list">
+            <li>Новичкам без опыта в IT</li>
+            <li>Тем, кто хочет перейти в QA из другой сферы</li>
+            <li>Junior QA, кому нужно систематизировать знания</li>
+          </ul>
+        </article>
+        <article class="module-card offer-card">
+          <h3>Что будет на выходе</h3>
+          <ul class="offer-list">
+            <li>Уверенная работа с тест-дизайном и чек-листами</li>
+            <li>Практика API и SQL на реальных сценариях</li>
+            <li>Готовый roadmap для трудоустройства</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
     <section class="section container" id="program">
       <div class="section-head">
-        <h2>Что уже реализовано в MVP</h2>
+        <h2>Программа курса</h2>
       </div>
       <div class="grid">
         <article class="module-card">
-          <h3>CRM</h3>
-          <p>Создание ученика, логин/пароль, доступ до даты, выбор текущего ученика, модерация комментариев.</p>
+          <h3>Модуль 1: QA Fundamentals</h3>
+          <p>Жизненный цикл тестирования, техники тест-дизайна, приоритизация дефектов.</p>
         </article>
         <article class="module-card">
-          <h3>Структура обучения</h3>
-          <p>Модули и темы с контент-блоками: текст, список, image-плейсхолдер, встроенный тренажёр.</p>
+          <h3>Модуль 2: API Testing</h3>
+          <p>Postman, коллекции, авторизация, негативные проверки и автопроверки в запросах.</p>
         </article>
         <article class="module-card">
-          <h3>Портал ученика</h3>
-          <p>Проверка подписки при входе, защита темы при истекшем доступе, окно комментариев в формате мини-чата.</p>
+          <h3>Модуль 3: SQL for QA</h3>
+          <p>SELECT/JOIN/GROUP BY, валидация данных после API-операций, кейсы для интервью.</p>
+        </article>
+        <article class="module-card">
+          <h3>Модуль 4: Career Track</h3>
+          <p>Резюме, легенда проекта, пробные интервью и стратегия выхода на оффер.</p>
         </article>
       </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>Тарифы</h2>
+      </div>
+      <div class="plans-grid">
+        <article class="module-card price-card">
+          <p class="price-name">Base</p>
+          <p class="price-value">$229</p>
+          <p>Доступ к программе, тренажёрам и комьюнити.</p>
+          <a class="btn btn-primary" data-whatsapp-link href="#" target="_blank" rel="noopener noreferrer">Купить через WhatsApp</a>
+        </article>
+        <article class="module-card price-card featured">
+          <p class="price-name">Pro</p>
+          <p class="price-value">$399</p>
+          <p>Base + персональные разборы, помощь с резюме и подготовка к интервью.</p>
+          <a class="btn btn-primary" data-whatsapp-link href="#" target="_blank" rel="noopener noreferrer">Выбрать Pro</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>FAQ</h2>
+      </div>
+      <div class="faq-list">
+        <article class="module-card">
+          <h3>Сколько часов в неделю нужно?</h3>
+          <p>Рекомендуем 6-8 часов: 2 занятия + практика и домашние задания.</p>
+        </article>
+        <article class="module-card">
+          <h3>Нужен ли опыт в программировании?</h3>
+          <p>Нет. Курс рассчитан на новичков, всё объясняется с базы.</p>
+        </article>
+        <article class="module-card">
+          <h3>Как происходит покупка?</h3>
+          <p>Пиши в WhatsApp, подберём тариф и отправим детали оплаты для СНГ.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container">
+      <article class="module-card contact-card">
+        <h2>Контакты и запись</h2>
+        <p><strong id="sales-contact-name">Отдел продаж QA Academy</strong></p>
+        <p>WhatsApp: <span id="sales-contact-phone"></span></p>
+        <p id="sales-contact-hours">Ежедневно 10:00-21:00 (UTC+3)</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" data-whatsapp-link href="#" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+          <a class="btn btn-ghost" href="#course-brief">Краткое содержание курса</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="section container" id="course-brief">
+      <article class="module-card">
+        <h2>Краткое содержание курса</h2>
+        <p>4 модуля: Fundamentals, API, SQL, Career Track. В каждом модуле есть теория, практические задания и разбор типичных ошибок.</p>
+      </article>
     </section>
   </main>
 
@@ -66,6 +150,10 @@
     <p>© <span id="year"></span> QA Academy</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="site-config.js"></script>
+  <script src="common/config.js"></script>
+  <script src="common/dom.js"></script>
+  <script src="common/bootstrap.js"></script>
+  <script src="common/landing-style.js"></script>
 </body>
 </html>

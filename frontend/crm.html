@@ -2,87 +2,10 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=./crm/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QA Academy CRM</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Redirecting to CRM</title>
+  <script>window.location.replace('./crm/');</script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">QA Academy</a>
-      <div class="header-links">
-        <a class="header-cta" href="student.html">Портал ученика</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container section">
-    <div class="section-head">
-      <h1>CRM администратора</h1>
-      <p>Ручное управление доступами и комментариями.</p>
-    </div>
-
-    <section class="module-card" id="admin-auth-card">
-      <h2>Вход администратора</h2>
-      <form id="admin-login-form" class="subscribe-form">
-        <label>
-          Логин
-          <input type="text" name="login" required>
-        </label>
-        <label>
-          Пароль
-          <input type="password" name="password" required>
-        </label>
-        <button class="btn btn-primary" type="submit">Войти</button>
-        <p class="form-message" id="admin-login-message"></p>
-      </form>
-    </section>
-
-    <section id="crm-panel" class="hidden">
-      <section class="crm-grid">
-        <article class="module-card">
-          <h2>Добавить/обновить ученика</h2>
-          <form id="student-form" class="subscribe-form">
-            <label>
-              Имя
-              <input type="text" name="name" required>
-            </label>
-            <label>
-              Логин
-              <input type="text" name="login" required>
-            </label>
-            <label>
-              Пароль
-              <input type="text" name="password" required>
-            </label>
-            <label>
-              Доступ до
-              <input type="date" name="accessUntil" required>
-            </label>
-            <button class="btn btn-primary" type="submit">Сохранить</button>
-            <p class="form-message" id="student-form-message"></p>
-          </form>
-        </article>
-
-        <article class="module-card">
-          <h2>Ученики</h2>
-          <div id="students-list" class="crm-list"></div>
-        </article>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <h2>Комментарии из тем</h2>
-        </div>
-        <div id="comments-admin-list" class="crm-comments"></div>
-      </section>
-    </section>
-  </main>
-
-  <script src="app-data.js"></script>
-  <script src="crm.js"></script>
-</body>
+<body></body>
 </html>

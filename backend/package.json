@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "qa-academy-backend",
   "version": "0.1.0",
   "private": true,
@@ -7,15 +7,19 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:prod": "node dist/main",
-    "typeorm": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "typeorm": "node ./node_modules/ts-node/dist/bin.js -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "migration:run": "npm run typeorm -- migration:run -d src/infrastructure/db/data-source.ts",
     "migration:generate": "npm run typeorm -- -d src/infrastructure/db/data-source.ts migration:generate src/migrations/Migration",
     "migration:create": "npm run typeorm -- migration:create",
     "migration:revert": "npm run typeorm -- -d src/infrastructure/db/data-source.ts migration:revert",
     "db:create": "node scripts/create-db.js",
     "db:reset": "node scripts/reset-db.js",
-    "db:seed-admin": "node scripts/seed-admin.js",
-    "db:seed-students": "node scripts/seed-students.js"
+    "db:debug": "node scripts/debug-db.js",
+    "db:seed:test-users": "node scripts/seed-test-users.js",
+    "db:docker:up:mac": "bash scripts-root/db-up.sh",
+    "db:docker:up:win": "powershell -ExecutionPolicy Bypass -File scripts-root/db-up.ps1",
+    "db:docker:reset:mac": "bash scripts-root/db-reset.sh",
+    "db:seed:course:qa-bible": "node scripts/seed-course-qa-bible.js"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

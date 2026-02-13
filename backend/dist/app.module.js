@@ -21,6 +21,7 @@ const course_controller_module_1 = require("./controllers/public/course/course.c
 const topic_comment_controller_module_1 = require("./controllers/public/topic-comment/topic-comment.controller.module");
 const admin_student_controller_module_1 = require("./controllers/v1/admin-student/admin-student.controller.module");
 const admin_comment_controller_module_1 = require("./controllers/v1/admin-comment/admin-comment.controller.module");
+const admin_course_controller_module_1 = require("./controllers/v1/admin-course/admin-course.controller.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -48,6 +49,7 @@ exports.AppModule = AppModule = __decorate([
             topic_comment_controller_module_1.TopicCommentControllerModule,
             admin_student_controller_module_1.AdminStudentControllerModule,
             admin_comment_controller_module_1.AdminCommentControllerModule,
+            admin_course_controller_module_1.AdminCourseControllerModule,
         ],
     })
 ], AppModule);

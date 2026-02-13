@@ -23,8 +23,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateStudentDto.prototype, "login", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.ValidateIf)((o) => o.password != null && o.password !== ''),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(4),
+    (0, class_validator_1.MinLength)(4, { message: 'Пароль не менее 4 символов' }),
     __metadata("design:type", String)
 ], CreateStudentDto.prototype, "password", void 0);
 __decorate([

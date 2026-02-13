@@ -11,7 +11,7 @@ exports.appConfig = {
         .filter(Boolean),
     db: {
         host: process.env.API_DB_HOST || 'localhost',
-        port: parseInt(process.env.API_DB_PORT || '5433', 10),
+        port: parseInt(process.env.API_DB_PORT || '5435', 10),
         database: process.env.API_DB_DATABASE || 'app_db',
         username: process.env.API_DB_USERNAME || 'postgres',
         password: process.env.API_DB_PASSWORD || 'postgres',

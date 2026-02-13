@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https: http://localhost:4000; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>QA Academy Student Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">QA Academy</a>
+      <div class="header-links">
+        <button class="header-cta header-cta-menu hidden" id="module-sidebar-toggle" type="button" aria-expanded="false" aria-controls="module-nav">☰ Модули</button>
+        <div class="header-profile hidden" id="header-profile">
+          <button class="header-cta" id="profile-toggle" type="button" aria-expanded="false">Профиль</button>
+          <div id="access-state" class="header-profile-panel hidden"></div>
+        </div>
+        <a class="header-cta" id="student-crm-link" href="../crm/">CRM</a>
+        <a class="header-cta header-cta-sales" id="student-sales-cta" data-whatsapp-link href="#" target="_blank" rel="noopener noreferrer">Купить курс</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container section">
+    <section class="module-card" id="auth-card">
+      <p class="badge">Портал ученика</p>
+      <h1>Вход ученика</h1>
+      <p>Введи логин и пароль, выданные в CRM.</p>
+      <form id="login-form" class="subscribe-form">
+        <label>
+          Логин
+          <input type="text" name="login" required>
+        </label>
+        <label>
+          Пароль
+          <input type="password" name="password" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Войти</button>
+        <p class="form-message" id="login-message"></p>
+      </form>
+    </section>
+
+    <section id="student-app" class="student-app hidden">
+      <aside class="module-card student-sidebar">
+        <div class="student-sidebar-header">
+          <h2>Модули</h2>
+          <button class="btn btn-ghost student-sidebar-close" id="module-sidebar-close" type="button" aria-label="Закрыть меню модулей">Закрыть</button>
+        </div>
+        <div id="module-nav"></div>
+      </aside>
+      <div class="student-sidebar-backdrop" id="student-sidebar-backdrop"></div>
+
+      <section class="student-content-wrap">
+        <div class="lesson-layout" id="lesson-layout">
+          <article class="module-card lesson-left">
+            <div id="lesson-reading-pane">
+              <h2 id="topic-title"></h2>
+              <p class="lesson-meta" id="topic-module"></p>
+              <span class="self-check-hint-timer" id="self-check-hint-timer" aria-live="polite"></span>
+              <div id="topic-content"></div>
+            </div>
+            <div class="lesson-topic-actions">
+              <button class="btn btn-ghost hidden" id="self-check-hint-btn" type="button">Показать на 10 секунд</button>
+              <button class="btn btn-ghost" id="comments-toggle" type="button" aria-expanded="false">Открыть комментарии</button>
+            </div>
+            <section class="module-card lesson-comments hidden" id="lesson-comments">
+              <header class="lesson-comments-header">
+                <strong>Комментарии</strong>
+                <span id="comment-topic-name"></span>
+              </header>
+              <div class="comment-list" id="comment-list"></div>
+              <form id="comment-form">
+                <input type="text" name="comment" placeholder="Написать комментарий..." required>
+                <button type="submit">Отправить</button>
+              </form>
+              <p class="form-message" id="comment-form-message"></p>
+            </section>
+          </article>
+          <aside class="module-card lesson-right hidden" id="trainer-pane"></aside>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../site-config.js"></script>
+  <script src="../common/config.js"></script>
+  <script src="../common/dom.js"></script>
+  <script src="../common/bootstrap.js"></script>
+  <script src="../data/storage.js"></script>
+  <script src="../data/http.js"></script>
+  <script src="../data/api.js"></script>
+  <script src="./state.js"></script>
+  <script src="./render.js"></script>
+  <script src="./handlers.js"></script>
+  <script src="./bootstrap.js"></script>
+</body>
+</html>
